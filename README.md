@@ -38,7 +38,7 @@ and then browser [http://localhost/changesmbpasswd](http://localhost/changesmbpa
 
 ## you also can start it with systemd socket
 	
-How to compile it 
+## How to compile it 
 
 	make
 
