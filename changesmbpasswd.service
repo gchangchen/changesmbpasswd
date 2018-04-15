@@ -1,0 +1,5 @@
+[Service]
+ExecStart=/usr/local/bin/changesmbpasswd 4000
+
+[Install]
+WantedBy=multi-user.target
