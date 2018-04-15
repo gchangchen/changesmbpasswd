@@ -37,6 +37,13 @@ or for apache.
 and then browser [http://localhost/changesmbpasswd](http://localhost/changesmbpasswd).
 
 ## you also can start it with systemd socket
+Just like this:
+	sudo cp changesmbpasswd /usr/local/bin/
+	sudo cp changesmbpasswd.service /etc/systemd/system/
+	sudo cp changesmbpasswd.socket /etc/systemd/system/
+	sudo systemctl daemon-reload
+	sudo systemctl enable changesmbpasswd.socket
+	sudo systemctl start changesmbpasswd.socket
 	
 ## How to compile it 
 
@@ -44,4 +51,4 @@ and then browser [http://localhost/changesmbpasswd](http://localhost/changesmbpa
 
 or use gcc
 
-	gcc -O2 -o changesmbpasswd changesmbpasswd.c qs_parse.c -lsystemd
+	gcc -O2 -o changesmbpasswd changesmbpasswd.c qs_parse.c -ldl

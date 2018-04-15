@@ -10,7 +10,10 @@
 #include <pwd.h>
 #include <stdlib.h>
 #include <signal.h>
-#include <systemd/sd-daemon.h>
+
+//#include <systemd/sd-daemon.h>
+#include <dlfcn.h>
+
 #include "qs_parse.h"
 
 const char * const html_template =
@@ -285,8 +288,14 @@ static int create_server(const char *addr, unsigned short port, int type)
 
 int main(int argc, char *argv[])
 {
-	int listen_sock = SD_LISTEN_FDS_START;
-	if (1 != sd_listen_fds(0)){
+	void *handle = dlopen("libsystemd.so", RTLD_LAZY);
+	int (*sd_listen_fds)(int) = NULL;
+	if (handle) {
+		sd_listen_fds = (int (*)(int)) dlsym(handle, "sd_listen_fds");
+	}
+
+	int listen_sock = 3; //SD_LISTEN_FDS_START;
+	if (sd_listen_fds == NULL || (1 != sd_listen_fds(0))){
 		if(argc < 2){
 			cgi_handle();
 			return 0;
@@ -315,6 +324,6 @@ int main(int argc, char *argv[])
 		close(client_sock);
 	}
 
-	exit(0);
+	return 0;
 }
 
