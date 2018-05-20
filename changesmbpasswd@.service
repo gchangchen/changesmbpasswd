@@ -1,0 +1,12 @@
+[Unit]
+Description=Changesmbpasswd Per-Connection Daemon
+After=network.target
+
+[Service]
+ExecStart=-/usr/local/bin/changesmbpasswd -i
+StandardInput=socket
+StandardError=syslog
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

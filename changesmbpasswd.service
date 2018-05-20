@@ -1,5 +1,9 @@
+[Unit]
+Description=Changesmbpasswd Daemon
+After=network.target
+
 [Service]
-ExecStart=/usr/local/bin/changesmbpasswd 4000
+ExecStart=/usr/local/bin/changesmbpasswd -D -p 4000
 
 [Install]
 WantedBy=multi-user.target

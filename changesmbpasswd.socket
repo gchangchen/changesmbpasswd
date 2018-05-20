@@ -1,8 +1,10 @@
 [Unit]
-Description=Change smb passwd scgi Socket
+Description=Change smb passwd via http
+Conflicts=changesmbpasswd.service
 
 [Socket]
 ListenStream=4000
+Accept=yes
 
 [Install]
 WantedBy=sockets.target

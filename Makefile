@@ -1,6 +1,14 @@
 
 
-OBJ = changesmbpasswd.o qs_parse.o
+OBJ = changesmbpasswd.o qs_parse.o picohttpparser.o
+
+DEBUG ?= 0
+ifeq ($(DEBUG), 0)
+	LDFLAGS += -s
+	CFLAGS += -O2 -DNDEBUG
+else
+	CFLAGS += -g
+endif
 
 CC = $(CROSS_COMPILE)gcc
 #CC = $(CROSS_COMPILE)clang
@@ -17,7 +25,6 @@ export CC LD AS CPP AR NM STRIP OBJCOPY OBJDUMP CFLAGS LDFLAGS
 
 changesmbpasswd:$(OBJ)
 	$(CC) $^ -o $@ $(LDFLAGS) -ldl
-
 
 .PHONY:clean
 clean:
