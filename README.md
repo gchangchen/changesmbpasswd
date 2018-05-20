@@ -45,9 +45,10 @@ and then browser [http://localhost/changesmbpasswd](http://localhost/changesmbpa
 #### start it.
 	sudo systemctl start changesmbpasswd
 or use systemd socket
+
 	sudo systemctl start changesmbpasswd.socket
 
-#### start it from boot automatic.
+#### Enable it to be started on bootup
 	sudo systemctl enable changesmbpasswd.socket
 	
 ## How to compile it 
